@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biểu mẫu Dự đoán Sinh viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        .fade-result {
+            display: none;
+            transition: opacity 1s ease;
+        }
+        .fade-result.show {
+            display: block;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Biểu mẫu Dự đoán Sinh viên</h2>
+        <form id="prediction-form">
+            <!-- Trường học -->
+            <div class="form-group">
+                <label for="school">Trường học</label>
+                <select class="form-control" id="school" name="school" required>
+                    <option value="GP">Gabriel Pereira</option>
+                    <option value="MS">Mousinho da Silveira</option>
+                </select>
+            </div>
+
+            <!-- Giới tính -->
+            <div class="form-group">
+                <label for="sex">Giới tính</label>
+                <select class="form-control" id="sex" name="sex" required>
+                    <option value="F">Nữ</option>
+                    <option value="M">Nam</option>
+                </select>
+            </div>
+
+            <!-- Tuổi -->
+            <div class="form-group">
+                <label for="age">Tuổi</label>
+                <input type="number" class="form-control" id="age" name="age" min="15" max="22" required>
+            </div>
+
+            <!-- Địa chỉ -->
+            <div class="form-group">
+                <label for="address">Địa chỉ</label>
+                <select class="form-control" id="address" name="address" required>
+                    <option value="U">Thành thị</option>
+                    <option value="R">Nông thôn</option>
+                </select>
+            </div>
+
+            <!-- Kích thước gia đình -->
+            <div class="form-group">
+                <label for="famsize">Kích thước gia đình</label>
+                <select class="form-control" id="famsize" name="famsize" required>
+                    <option value="LE3">Ít hơn hoặc bằng 3</option>
+                    <option value="GT3">Lớn hơn 3</option>
+                </select>
+            </div>
+
+            <!-- Tình trạng sống của cha mẹ -->
+            <div class="form-group">
+                <label for="Pstatus">Tình trạng sống của cha mẹ</label>
+                <select class="form-control" id="Pstatus" name="Pstatus" required>
+                    <option value="T">Sống cùng nhau</option>
+                    <option value="A">Xa nhau</option>
+                </select>
+            </div>
+
+            <!-- Học vấn của mẹ -->
+            <div class="form-group">
+                <label for="Medu">Học vấn của mẹ</label>
+                <select class="form-control" id="Medu" name="Medu" required>
+                    <option value="0">Không có</option>
+                    <option value="1">Tiểu học (lớp 4)</option>
+                    <option value="2">Lớp 5 đến lớp 9</option>
+                    <option value="3">Trung học</option>
+                    <option value="4">Giáo dục đại học</option>
+                </select>
+            </div>
+
+            <!-- Học vấn của cha -->
+            <div class="form-group">
+                <label for="Fedu">Học vấn của cha</label>
+                <select class="form-control" id="Fedu" name="Fedu" required>
+                    <option value="0">Không có</option>
+                    <option value="1">Tiểu học (lớp 4)</option>
+                    <option value="2">Lớp 5 đến lớp 9</option>
+                    <option value="3">Trung học</option>
+                    <option value="4">Giáo dục đại học</option>
+                </select>
+            </div>
+
+            <!-- Nghề nghiệp của mẹ -->
+            <div class="form-group">
+                <label for="Mjob">Nghề nghiệp của mẹ</label>
+                <select class="form-control" id="Mjob" name="Mjob" required>
+                    <option value="teacher">Giáo viên</option>
+                    <option value="health">Y tế</option>
+                    <option value="services">Dịch vụ công</option>
+                    <option value="at_home">Ở nhà</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+
+            <!-- Nghề nghiệp của cha -->
+            <div class="form-group">
+                <label for="Fjob">Nghề nghiệp của cha</label>
+                <select class="form-control" id="Fjob" name="Fjob" required>
+                    <option value="teacher">Giáo viên</option>
+                    <option value="health">Y tế</option>
+                    <option value="services">Dịch vụ công</option>
+                    <option value="at_home">Ở nhà</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="reason">Lý do học tập</label>
+                <select class="form-control" id="reason" name="reason" required>
+                    <option value="course">Khóa học</option>
+                    <option value="home">Gia đình</option>
+                    <option value="reputation">Danh tiếng</option>
+                </select>
+            </div>
+        
+            <!-- Người giám hộ -->
+            <div class="form-group">
+                <label for="guardian">Người giám hộ</label>
+                <select class="form-control" id="guardian" name="guardian" required>
+                    <option value="mother">Mẹ</option>
+                    <option value="father">Cha</option>
+                    <option value="other">Khác</option>
+                </select>
+            </div>
+        
+            <!-- Hỗ trợ học tập -->
+            <div class="form-group">
+                <label for="schoolsup">Hỗ trợ học tập</label>
+                <select class="form-control" id="schoolsup" name="schoolsup" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Hỗ trợ gia đình -->
+            <div class="form-group">
+                <label for="famsup">Hỗ trợ gia đình</label>
+                <select class="form-control" id="famsup" name="famsup" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Thanh toán -->
+            <div class="form-group">
+                <label for="paid">Thanh toán</label>
+                <select class="form-control" id="paid" name="paid" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Các hoạt động ngoại khóa -->
+            <div class="form-group">
+                <label for="activities">Các hoạt động ngoại khóa</label>
+                <select class="form-control" id="activities" name="activities" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Nhà trẻ -->
+            <div class="form-group">
+                <label for="nursery">Nhà trẻ</label>
+                <select class="form-control" id="nursery" name="nursery" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Học lên cao -->
+            <div class="form-group">
+                <label for="higher">Học lên cao</label>
+                <select class="form-control" id="higher" name="higher" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Internet -->
+            <div class="form-group">
+                <label for="internet">Internet</label>
+                <select class="form-control" id="internet" name="internet" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Quan hệ tình cảm -->
+            <div class="form-group">
+                <label for="romantic">Quan hệ tình cảm</label>
+                <select class="form-control" id="romantic" name="romantic" required>
+                    <option value="yes">Có</option>
+                    <option value="no">Không</option>
+                </select>
+            </div>
+        
+            <!-- Quan hệ gia đình -->
+            <div class="form-group">
+                <label for="famrel">Quan hệ gia đình</label>
+                <input type="number" class="form-control" id="famrel" name="famrel" min="1" max="5" required>
+            </div>
+        
+            <!-- Thời gian rảnh -->
+            <div class="form-group">
+                <label for="freetime">Thời gian rảnh</label>
+                <input type="number" class="form-control" id="freetime" name="freetime" min="1" max="5" required>
+            </div>
+        
+            <!-- Thời gian đi chơi -->
+            <div class="form-group">
+                <label for="goout">Thời gian đi chơi</label>
+                <input type="number" class="form-control" id="goout" name="goout" min="1" max="5" required>
+            </div>
+        
+            <!-- Điểm học tập Dalc -->
+            <div class="form-group">
+                <label for="Dalc">Điểm học tập Dalc</label>
+                <input type="number" class="form-control" id="Dalc" name="Dalc" min="1" max="5" required>
+            </div>
+        
+            <!-- Điểm học tập Walc -->
+            <div class="form-group">
+                <label for="Walc">Điểm học tập Walc</label>
+                <input type="number" class="form-control" id="Walc" name="Walc" min="1" max="5" required>
+            </div>
+        
+            <!-- Sức khỏe -->
+            <div class="form-group">
+                <label for="health">Sức khỏe</label>
+                <input type="number" class="form-control" id="health" name="health" min="1" max="5" required>
+            </div>
+        
+            <!-- Số ngày vắng -->
+            <div class="form-group">
+                <label for="absences">Số ngày vắng</label>
+                <input type="number" class="form-control" id="absences" name="absences" min="0" max="100" required>
+            </div>
+            <!-- Thời gian đi lại -->
+            <div class="form-group">
+                <label for="traveltime">Thời gian đi lại</label>
+                <input type="number" class="form-control" id="traveltime" name="traveltime" min="1" max="4" required>
+            </div>
+
+            <!-- Thời gian học -->
+            <div class="form-group">
+                <label for="studytime">Thời gian học</label>
+                <input type="number" class="form-control" id="studytime" name="studytime" min="1" max="4" required>
+            </div>
+
+            <!-- Thất bại học tập -->
+            <div class="form-group">
+                <label for="failures">Thất bại học tập</label>
+                <input type="number" class="form-control" id="failures" name="failures" min="0" max="4" required>
+            </div>
+
+            <!-- Giá trị G1 -->
+            <div class="form-group">
+                <label for="G1">Điểm G1</label>
+                <input type="number" class="form-control" id="G1" name="G1" min="0" max="20" required>
+            </div>
+
+            <!-- Giá trị G2 -->
+            <div class="form-group">
+                <label for="G2">Điểm G2</label>
+                <input type="number" class="form-control" id="G2" name="G2" min="0" max="20" required>
+            </div>
+
+            <!-- Nút Gửi -->
+            <button type="submit" class="btn btn-primary">Gửi</button>
+        </form>
+
+
+        <!-- Kết quả dự đoán -->
+        <div id="prediction-result" class="mt-4 fade-result">
+            <h4>Kết quả Dự đoán:</h4>
+            <p><strong>Kết quả:</strong> <span id="result-text">Kết quả dự đoán sẽ xuất hiện ở đây</span></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#prediction-form').on('submit', function(e) {
+                e.preventDefault();  // Prevent form submission
+
+                // Collect form data
+                var formData = $(this).serialize();
+
+                // Send data to the Flask server using AJAX
+                $.ajax({
+                    url: '/predict',
+                    type: 'POST',
+                    data: formData,
+                    success: function(response) {
+                        // Show the result
+                        $('#result-text').text(response.result);
+                        $('#prediction-result').addClass('show');
+                    },
+                    error: function() {
+                        alert("Có lỗi xảy ra. Vui lòng thử lại.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
